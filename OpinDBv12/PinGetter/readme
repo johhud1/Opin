@@ -1,0 +1,14 @@
+creating a new Pin -- httpPOST request to url '/createPin/{username}'where username is the creator of the new pin with following key-value pairs, 
+		'latitude': int, 
+		'longitude':int,
+		'comment': string (this is the initial)
+creating new User -- httpGET request to url '/createUser/{username}' where username is new username
+
+creating new Comment -- httpPOST request to url '/createComment/{pin_id}' where pin_id is id of pin to which comment will be added. key-value pairs as follows
+		'comment': string
+		'user': string (author of comment)
+
+requesting pins -- httpGet to url '/queryPins'	
+		returns:
+			json object with all pins in database
+deleting a pin -- httpGet to url '/deletePin/{pin_id}'
