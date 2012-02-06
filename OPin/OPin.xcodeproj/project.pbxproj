@@ -24,7 +24,6 @@
 		06FE162514DDAA9500D776C6 /* addCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FE161514DDAA9500D776C6 /* addCommentTableViewCell.m */; };
 		06FE162614DDAA9500D776C6 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FE161714DDAA9500D776C6 /* Comment.m */; };
 		06FE162714DDAA9500D776C6 /* constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FE161914DDAA9500D776C6 /* constants.m */; };
-		06FE162814DDAA9500D776C6 /* dbUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FE161B14DDAA9500D776C6 /* dbUtils.m */; };
 		06FE162914DDAA9500D776C6 /* Pin.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FE161D14DDAA9500D776C6 /* Pin.m */; };
 		06FE162A14DDAA9500D776C6 /* PinEnt.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FE161F14DDAA9500D776C6 /* PinEnt.m */; };
 		06FE162B14DDAA9500D776C6 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06FE162014DDAA9500D776C6 /* Storyboard.storyboard */; };
@@ -120,8 +119,6 @@
 		06FE161714DDAA9500D776C6 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		06FE161814DDAA9500D776C6 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		06FE161914DDAA9500D776C6 /* constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = constants.m; sourceTree = "<group>"; };
-		06FE161A14DDAA9500D776C6 /* dbUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dbUtils.h; sourceTree = "<group>"; };
-		06FE161B14DDAA9500D776C6 /* dbUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dbUtils.m; sourceTree = "<group>"; };
 		06FE161C14DDAA9500D776C6 /* Pin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pin.h; sourceTree = "<group>"; };
 		06FE161D14DDAA9500D776C6 /* Pin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pin.m; sourceTree = "<group>"; };
 		06FE161E14DDAA9500D776C6 /* PinEnt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinEnt.h; sourceTree = "<group>"; };
@@ -238,8 +235,6 @@
 				06FE161714DDAA9500D776C6 /* Comment.m */,
 				06FE161814DDAA9500D776C6 /* constants.h */,
 				06FE161914DDAA9500D776C6 /* constants.m */,
-				06FE161A14DDAA9500D776C6 /* dbUtils.h */,
-				06FE161B14DDAA9500D776C6 /* dbUtils.m */,
 				06FE161C14DDAA9500D776C6 /* Pin.h */,
 				06FE161D14DDAA9500D776C6 /* Pin.m */,
 				06FE161E14DDAA9500D776C6 /* PinEnt.h */,
@@ -465,7 +460,6 @@
 				06FE162514DDAA9500D776C6 /* addCommentTableViewCell.m in Sources */,
 				06FE162614DDAA9500D776C6 /* Comment.m in Sources */,
 				06FE162714DDAA9500D776C6 /* constants.m in Sources */,
-				06FE162814DDAA9500D776C6 /* dbUtils.m in Sources */,
 				06FE162914DDAA9500D776C6 /* Pin.m in Sources */,
 				06FE162A14DDAA9500D776C6 /* PinEnt.m in Sources */,
 				06FE162C14DDAA9500D776C6 /* tableViewController.m in Sources */,

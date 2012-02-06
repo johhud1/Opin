@@ -457,7 +457,6 @@
     
     //create dictionary from current map annotation and their id's
     NSArray* annotationArray = [myMap annotations];
-    NSLog(@"mymap annotations list (ie annotationArray) is %@", annotationArray);
     NSMutableArray* annotationIDsArray = [self getAnnotationIDs:annotationArray];
     //NSLog(@"just created array of id's from annotationArray, array of id's is %@", annotationIDsArray);
     NSMutableDictionary* annotationDic = [[NSMutableDictionary alloc] initWithObjects:annotationArray forKeys:annotationIDsArray];
@@ -548,8 +547,6 @@
 }
 
 - (void) setAnnotation:(AddressAnnotation *)annotation withDateString:(NSString *)dateStr{
-
-    NSLog(@"dateStr sent to setAnnotationWithDateString is %@", dateStr);
     // Convert string to date object
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
