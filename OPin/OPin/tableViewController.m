@@ -290,8 +290,13 @@
         else{
             cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
             [cell.detailTextLabel setNumberOfLines: 0];
-            cell.detailTextLabel.text = [[commentArray objectAtIndex:indexPath.row] mMessage];
-            cell.textLabel.text = [[commentArray objectAtIndex:indexPath.row] mAuthor];
+            Comment* comment = [commentArray objectAtIndex:indexPath.row];
+            cell.detailTextLabel.text = [comment mMessage];
+            NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
+            [dateFormat setDateFormat:@" E, hh:ssa"];
+            NSString* user = [comment mAuthor];
+            NSString* title = [NSString stringWithFormat:@"%@ - %@", user, [dateFormat stringFromDate:[comment mTimestamp]]];
+            [cell.textLabel setText:title];
         }
     }
     return cell;
@@ -319,7 +324,7 @@
 
 }
 - (void) handleGetCommentsResponse:(RKResponse*) response{
-    NSLog(@"in handleGetCommentsResponse");
+    NSLog(@"in handleGetCommentsResponse, response is %@", response);
     NSError* jsonError;
     NSArray* responseJSONArray = [NSJSONSerialization JSONObjectWithData:[response body] options:NSJSONReadingAllowFragments error:&jsonError];
     NSLog([jsonError localizedDescription]);
@@ -329,7 +334,15 @@
         NSDictionary* commentsFields = [commentModelDict valueForKey:[constants getJSONFieldsKey]];
         NSString* comment = [commentsFields valueForKey:[constants getJSONCommentKey]];
         NSString* author = [commentsFields valueForKey:[constants getJSONAuthorKey]];
+        NSString* dateStr = [commentsFields valueForKey:@"pub_date"];
+        NSLog(@"dateStr is %@", dateStr);
+        // Convert string to date object
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSDate *date = [dateFormat dateFromString:dateStr]; 
+        
         Comment* tempComment = [[Comment alloc] initWithMessage:comment author:author];
+        [tempComment setMTimestamp:date];
         NSLog(@"adding comment %@", tempComment);
         [responseCommentArray addObject:tempComment];
     }

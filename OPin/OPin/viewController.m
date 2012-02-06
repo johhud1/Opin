@@ -434,11 +434,11 @@
     
     NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
     // Convert date object to desired output format
-    [dateFormat setDateFormat:@" E, hh:ssa"];
-    NSString* dateStr = [dateFormat stringFromDate:[NSDate date]];
-
-    NSString* finalTitle = [NSString stringWithFormat:@"%@ - %@", [myCurrentAnn title], dateStr];
-    [myCurrentAnn setTitle:finalTitle];
+//    [dateFormat setDateFormat:@" E, hh:ssa"];
+//    NSString* dateStr = [dateFormat stringFromDate:[NSDate date]];
+//
+//    NSString* finalTitle = [NSString stringWithFormat:@"%@ - %@", [myCurrentAnn title], dateStr];
+//    [myCurrentAnn setTitle:finalTitle];
     [self.myMap addAnnotation:myCurrentAnn];
     
     //Once pin is created, allow user to create a new pin once more
@@ -483,11 +483,11 @@
         //NSLog(@"iterating through JSONresponse, checking for annotation with ID %@", dbpin_id);
         AddressAnnotation* annotation = [[AddressAnnotation alloc] initWithCoordinate:[myloc coordinate]];
         [self setAnnotation:annotation withDateString:[pinFields valueForKey:@"pub_date"]];
-        // Convert date object to desired output format
-        NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setDateFormat:@" E, hh:ssa"];
-        NSString* title = [NSString stringWithFormat:@"%@ - %@", user, [dateFormat stringFromDate:[annotation pub_date]]];
-        [annotation setTitle:title];
+        // Convert date object to desired output format                                         //TIMESTAMP/DATE FOR PINS HERE
+//        NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
+//        [dateFormat setDateFormat:@" E, hh:ssa"];
+//        NSString* title = [NSString stringWithFormat:@"%@ - %@", user, [dateFormat stringFromDate:[annotation pub_date]]];
+        [annotation setTitle:user];
         [annotation setSubtitle:firstComment];
         [annotation setPin_id:dbpin_id];
         

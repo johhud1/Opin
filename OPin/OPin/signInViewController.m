@@ -52,23 +52,7 @@
     UIColor *backgroundColor = [[UIColor alloc] initWithPatternImage:backgroundImage];
     //self.backgroundColor = backgroundColor;
     self.navigationController.view.backgroundColor = backgroundColor;    
-    //[backGroundView setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.5]];
-    
-//    UIView* overlay = [[UIView alloc] initWithFrame: self.view.frame];
-//    [overlay setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:.8]];
-//    [signInViewController.view addSubview:overlay];
-    
-    //self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.4f];
-
-    //[viewController setbackgroundcolor] = [[UIColor blackColor] colorWithAlphaComponent:0.8f];
-    
-//    self.view.backgroundColor = blackColor;
-//    editText.backgroundColor = [UIColor clearColor];
-    
-    
-    
-    //[self backg
-
+    //[backGroundView setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.5]];  
     
 }
 
