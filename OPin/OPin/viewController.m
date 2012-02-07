@@ -59,6 +59,8 @@
     isRemovePinBarItemSet = FALSE;
 
     [self jumpToMyLoc];
+    
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -199,8 +201,7 @@
          //self.navigationItem.leftBarButtonItem = nil;
          animateView.frame = CGRectMake(0, -80, 320, 69);
          myMap.frame = CGRectMake(0,0,320, 415);
-         [upperRightToolBut setTitle:@"What's up?"];  
-         
+         [upperRightToolBut setTitle:@"What's up?"];
      }
                      completion:^(BOOL finished){
                          animateView.text = @"";
@@ -267,12 +268,16 @@
     //[annView release];
     annView.canShowCallout = YES;
     if([(AddressAnnotation*) annotation isMyPin]){
-        annView.pinColor = MKPinAnnotationColorPurple;
+        annView.image = [UIImage imageNamed:[NSString stringWithFormat:@"opinpinNewTrim.png"]];
     }
     else{
-        annView.pinColor = MKPinAnnotationColorGreen;
+//        annView.pinColor = MKPinAnnotationColorGreen;
+        annView.image = [UIImage imageNamed:[NSString stringWithFormat:@"opinpinNewTrimSmall.png"]];
+
+//  
     }
-    annView.animatesDrop = YES;
+
+    //annView.animatesDrop = YES;
     UIButton* calloutDetailButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     int buttonTag = [[(AddressAnnotation*)annotation pin_id] intValue];
     NSLog(@"in mapView:viewForAnnotation; annotation.pin_id is %d, and myCurrentAnn.pin_id is %@", buttonTag, [myCurrentAnn pin_id]);

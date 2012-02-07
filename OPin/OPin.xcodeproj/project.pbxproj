@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06F80FB014E0838800003619 /* pinImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 06F80FAF14E0838800003619 /* pinImage.png */; };
+		06F80FB214E0A6C600003619 /* trial.png in Resources */ = {isa = PBXBuildFile; fileRef = 06F80FB114E0A6C600003619 /* trial.png */; };
+		06F80FB414E0B7B500003619 /* opinPin.png in Resources */ = {isa = PBXBuildFile; fileRef = 06F80FB314E0B7B500003619 /* opinPin.png */; };
+		06F80FB614E0BCB300003619 /* opinPinBIG.png in Resources */ = {isa = PBXBuildFile; fileRef = 06F80FB514E0BCB300003619 /* opinPinBIG.png */; };
+		06F80FB814E0BD1D00003619 /* opinPinHALF.png in Resources */ = {isa = PBXBuildFile; fileRef = 06F80FB714E0BD1D00003619 /* opinPinHALF.png */; };
+		06F80FBA14E0BD5400003619 /* opinPinQUART.png in Resources */ = {isa = PBXBuildFile; fileRef = 06F80FB914E0BD5400003619 /* opinPinQUART.png */; };
+		06F80FBD14E0D11300003619 /* opinPinQUARTLONG.png in Resources */ = {isa = PBXBuildFile; fileRef = 06F80FBB14E0D11300003619 /* opinPinQUARTLONG.png */; };
+		06F80FBE14E0D11300003619 /* opinPinSMALLLONG.png in Resources */ = {isa = PBXBuildFile; fileRef = 06F80FBC14E0D11300003619 /* opinPinSMALLLONG.png */; };
+		06F80FC114E0E30C00003619 /* opinPinNEWBIG.png in Resources */ = {isa = PBXBuildFile; fileRef = 06F80FBF14E0E30C00003619 /* opinPinNEWBIG.png */; };
+		06F80FC214E0E30C00003619 /* opinPinNEWDESIGN.png in Resources */ = {isa = PBXBuildFile; fileRef = 06F80FC014E0E30C00003619 /* opinPinNEWDESIGN.png */; };
+		06F80FC514E0F1A700003619 /* opinpinNewTrim.png in Resources */ = {isa = PBXBuildFile; fileRef = 06F80FC314E0F1A600003619 /* opinpinNewTrim.png */; };
+		06F80FC614E0F1A700003619 /* opinpinNewTrimSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 06F80FC414E0F1A600003619 /* opinpinNewTrimSmall.png */; };
 		06FE15DC14DDA88600D776C6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FE15DB14DDA88600D776C6 /* UIKit.framework */; };
 		06FE15DE14DDA88600D776C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FE15DD14DDA88600D776C6 /* Foundation.framework */; };
 		06FE15E014DDA88600D776C6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FE15DF14DDA88600D776C6 /* CoreGraphics.framework */; };
@@ -95,6 +107,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06F80FAF14E0838800003619 /* pinImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pinImage.png; path = ../../../pinImage.png; sourceTree = "<group>"; };
+		06F80FB114E0A6C600003619 /* trial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trial.png; sourceTree = "<group>"; };
+		06F80FB314E0B7B500003619 /* opinPin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opinPin.png; sourceTree = "<group>"; };
+		06F80FB514E0BCB300003619 /* opinPinBIG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opinPinBIG.png; sourceTree = "<group>"; };
+		06F80FB714E0BD1D00003619 /* opinPinHALF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opinPinHALF.png; sourceTree = "<group>"; };
+		06F80FB914E0BD5400003619 /* opinPinQUART.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opinPinQUART.png; sourceTree = "<group>"; };
+		06F80FBB14E0D11300003619 /* opinPinQUARTLONG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opinPinQUARTLONG.png; sourceTree = "<group>"; };
+		06F80FBC14E0D11300003619 /* opinPinSMALLLONG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opinPinSMALLLONG.png; sourceTree = "<group>"; };
+		06F80FBF14E0E30C00003619 /* opinPinNEWBIG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opinPinNEWBIG.png; sourceTree = "<group>"; };
+		06F80FC014E0E30C00003619 /* opinPinNEWDESIGN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opinPinNEWDESIGN.png; sourceTree = "<group>"; };
+		06F80FC314E0F1A600003619 /* opinpinNewTrim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opinpinNewTrim.png; sourceTree = "<group>"; };
+		06F80FC414E0F1A600003619 /* opinpinNewTrimSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opinpinNewTrimSmall.png; sourceTree = "<group>"; };
 		06FE15D714DDA88600D776C6 /* OPin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OPin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06FE15DB14DDA88600D776C6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		06FE15DD14DDA88600D776C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -244,6 +268,8 @@
 				06FE162214DDAA9500D776C6 /* tableViewController.m */,
 				06FE162314DDAA9500D776C6 /* viewController.h */,
 				06FE162414DDAA9500D776C6 /* viewController.m */,
+				06F80FC314E0F1A600003619 /* opinpinNewTrim.png */,
+				06F80FC414E0F1A600003619 /* opinpinNewTrimSmall.png */,
 				06FE15EF14DDA88600D776C6 /* OPin.xcdatamodeld */,
 				06FE162F14DDAB0E00D776C6 /* signInViewController.h */,
 				06FE163014DDAB0E00D776C6 /* signInViewController.m */,
@@ -255,6 +281,16 @@
 		06FE15E414DDA88600D776C6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				06F80FBF14E0E30C00003619 /* opinPinNEWBIG.png */,
+				06F80FC014E0E30C00003619 /* opinPinNEWDESIGN.png */,
+				06F80FBB14E0D11300003619 /* opinPinQUARTLONG.png */,
+				06F80FBC14E0D11300003619 /* opinPinSMALLLONG.png */,
+				06F80FB914E0BD5400003619 /* opinPinQUART.png */,
+				06F80FB714E0BD1D00003619 /* opinPinHALF.png */,
+				06F80FB514E0BCB300003619 /* opinPinBIG.png */,
+				06F80FB314E0B7B500003619 /* opinPin.png */,
+				06F80FB114E0A6C600003619 /* trial.png */,
+				06F80FAF14E0838800003619 /* pinImage.png */,
 				06FE1AA014DDB34B00D776C6 /* Icon@2x.png */,
 				06FE1A9E14DDB34000D776C6 /* Icon.png */,
 				06FE15E514DDA88600D776C6 /* OPin-Info.plist */,
@@ -420,6 +456,18 @@
 				06FE164114DDAC4000D776C6 /* tableTileBlack.png in Resources */,
 				06FE1A9F14DDB34000D776C6 /* Icon.png in Resources */,
 				06FE1AA114DDB34B00D776C6 /* Icon@2x.png in Resources */,
+				06F80FB014E0838800003619 /* pinImage.png in Resources */,
+				06F80FB214E0A6C600003619 /* trial.png in Resources */,
+				06F80FB414E0B7B500003619 /* opinPin.png in Resources */,
+				06F80FB614E0BCB300003619 /* opinPinBIG.png in Resources */,
+				06F80FB814E0BD1D00003619 /* opinPinHALF.png in Resources */,
+				06F80FBA14E0BD5400003619 /* opinPinQUART.png in Resources */,
+				06F80FBD14E0D11300003619 /* opinPinQUARTLONG.png in Resources */,
+				06F80FBE14E0D11300003619 /* opinPinSMALLLONG.png in Resources */,
+				06F80FC114E0E30C00003619 /* opinPinNEWBIG.png in Resources */,
+				06F80FC214E0E30C00003619 /* opinPinNEWDESIGN.png in Resources */,
+				06F80FC514E0F1A700003619 /* opinpinNewTrim.png in Resources */,
+				06F80FC614E0F1A700003619 /* opinpinNewTrimSmall.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

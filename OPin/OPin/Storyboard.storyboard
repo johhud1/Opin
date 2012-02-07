@@ -207,7 +207,7 @@
                     <tabBarItem key="tabBarItem" title="Item" id="hdM-Rx-XcR"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="rA5-ry-Fxg">
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.0096232982560287162" green="0.60257892219387754" blue="0.0046477598190910628" alpha="0.51000000000000001" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.0044807935455059462" green="0.28057238520408168" blue="0.0021640867449367945" alpha="0.51000000000000001" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="njG-Ed-uhG" kind="relationship" relationship="rootViewController" id="wcO-Ok-cLR"/>
