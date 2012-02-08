@@ -16,22 +16,11 @@
 #import "PinEnt.h"
 #import <RestKit/RestKit.h>
 #import "constants.h"
+#import "AddressAnnotation.h"
 
 #define METERS_PER_MILE 1609.344
 
-@interface AddressAnnotation : NSObject<MKAnnotation> {
-}
 
-@property (readwrite, nonatomic) BOOL isMyPin;
-@property (readwrite, strong, nonatomic) NSDate* pub_date;
-@property (readwrite, nonatomic) BOOL isValid;
-@property (readwrite, retain, nonatomic) NSNumber* pin_id;
-@property (readwrite, nonatomic) CLLocationCoordinate2D coordinate;
-@property (readwrite, copy, nonatomic) NSString* title;
-@property (readwrite, copy, nonatomic) NSString* subtitle;
--(id)initWithCoordinate:(CLLocationCoordinate2D) c;
-
-@end
 
 @interface viewController : UIViewController <MKMapViewDelegate, UITextViewDelegate, RKRequestDelegate>{
     MKUserLocation* myUserLocation;

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04C547AD14E20D2600286E03 /* topicList.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C547AC14E20D2600286E03 /* topicList.m */; };
+		04C547B014E2125F00286E03 /* AddressAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C547AF14E2125F00286E03 /* AddressAnnotation.m */; };
 		06F80FC114E0E30C00003619 /* opinPinNEWBIG.png in Resources */ = {isa = PBXBuildFile; fileRef = 06F80FBF14E0E30C00003619 /* opinPinNEWBIG.png */; };
 		06F80FC214E0E30C00003619 /* opinPinNEWDESIGN.png in Resources */ = {isa = PBXBuildFile; fileRef = 06F80FC014E0E30C00003619 /* opinPinNEWDESIGN.png */; };
 		06F80FC514E0F1A700003619 /* opinpinNewTrim.png in Resources */ = {isa = PBXBuildFile; fileRef = 06F80FC314E0F1A600003619 /* opinpinNewTrim.png */; };
@@ -101,6 +103,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04C547AB14E20D2600286E03 /* topicList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = topicList.h; sourceTree = "<group>"; };
+		04C547AC14E20D2600286E03 /* topicList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = topicList.m; sourceTree = "<group>"; };
+		04C547AE14E2125F00286E03 /* AddressAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressAnnotation.h; sourceTree = "<group>"; };
+		04C547AF14E2125F00286E03 /* AddressAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressAnnotation.m; sourceTree = "<group>"; };
 		06F80FBF14E0E30C00003619 /* opinPinNEWBIG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opinPinNEWBIG.png; sourceTree = "<group>"; };
 		06F80FC014E0E30C00003619 /* opinPinNEWDESIGN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opinPinNEWDESIGN.png; sourceTree = "<group>"; };
 		06F80FC314E0F1A600003619 /* opinpinNewTrim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opinpinNewTrim.png; sourceTree = "<group>"; };
@@ -252,8 +258,12 @@
 				06FE161E14DDAA9500D776C6 /* PinEnt.h */,
 				06FE161F14DDAA9500D776C6 /* PinEnt.m */,
 				06FE162014DDAA9500D776C6 /* Storyboard.storyboard */,
+				04C547AB14E20D2600286E03 /* topicList.h */,
+				04C547AC14E20D2600286E03 /* topicList.m */,
 				06FE162114DDAA9500D776C6 /* tableViewController.h */,
 				06FE162214DDAA9500D776C6 /* tableViewController.m */,
+				04C547AE14E2125F00286E03 /* AddressAnnotation.h */,
+				04C547AF14E2125F00286E03 /* AddressAnnotation.m */,
 				06FE162314DDAA9500D776C6 /* viewController.h */,
 				06FE162414DDAA9500D776C6 /* viewController.m */,
 				06FE15EF14DDA88600D776C6 /* OPin.xcdatamodeld */,
@@ -489,6 +499,8 @@
 				06FE162C14DDAA9500D776C6 /* tableViewController.m in Sources */,
 				06FE162D14DDAA9500D776C6 /* viewController.m in Sources */,
 				06FE163114DDAB0F00D776C6 /* signInViewController.m in Sources */,
+				04C547AD14E20D2600286E03 /* topicList.m in Sources */,
+				04C547B014E2125F00286E03 /* AddressAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

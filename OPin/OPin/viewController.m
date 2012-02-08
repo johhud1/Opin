@@ -6,26 +6,10 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import "topicList.h"
 #import "viewController.h"
 #import <QuartzCore/QuartzCore.h>
-
-@implementation AddressAnnotation
-
-@synthesize isMyPin;
-@synthesize pub_date;
-@synthesize isValid;
-@synthesize pin_id;
-@synthesize coordinate;
-@synthesize title;
-@synthesize subtitle;
-
--(id)initWithCoordinate:(CLLocationCoordinate2D) c{
-    isValid = TRUE;
-    coordinate = c;
-    NSLog(@"%f,%f", c.latitude, c.longitude);
-    return self;
-}
-@end
+#import "AddressAnnotation.h"
 
 @implementation viewController {
 }
@@ -134,7 +118,8 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    //return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
     //return YES;
 }
 
@@ -562,6 +547,15 @@
     [annotation setPub_date:date];
 }
 
+- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+    NSLog(@"in didRotatefromInterfaceOrientation");
+
+    if(fromInterfaceOrientation == UIDeviceOrientationPortrait){
+       topicList* topicList = [self.storyboard instantiateViewControllerWithIdentifier:@"topicList"];
+        [topicList setPinAnnotationArray:[myMap annotations]];
+       [self.navigationController pushViewController:topicList animated:YES];
+    }
+}
 
 
 @end
