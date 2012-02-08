@@ -25,8 +25,10 @@
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
+
     if (self) {
         // Custom initialization
+        
     }
     return self;
     
@@ -182,7 +184,7 @@
     [self setManagedObjectContext:[myDelegate managedObjectContext]];
 
 //    UITextView * textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 100, 32)];
-    
+
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(startComment)];
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
     UIImageView* backGroundView = [[UIImageView alloc] initWithImage:bgImage];
