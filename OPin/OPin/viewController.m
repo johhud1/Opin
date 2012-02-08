@@ -135,6 +135,7 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    //return YES;
 }
 
 - (IBAction)newEvent:(id)sender {
@@ -268,11 +269,11 @@
     //[annView release];
     annView.canShowCallout = YES;
     if([(AddressAnnotation*) annotation isMyPin]){
-        annView.image = [UIImage imageNamed:[NSString stringWithFormat:@"opinpinNewTrim.png"]];
+        annView.image = [UIImage imageNamed:[NSString stringWithFormat:@"opinPinSMALL.png"]];
     }
     else{
 //        annView.pinColor = MKPinAnnotationColorGreen;
-        annView.image = [UIImage imageNamed:[NSString stringWithFormat:@"opinpinNewTrimSmall.png"]];
+        annView.image = [UIImage imageNamed:[NSString stringWithFormat:@"opinPinSMALL.png"]];
 
 //  
     }
