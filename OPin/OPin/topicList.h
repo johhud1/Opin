@@ -15,6 +15,7 @@
 
 @property (readwrite, nonatomic, strong) NSMutableArray* pinAnnotationArray;
 @property (readwrite, nonatomic) BOOL pastMKUserAnnotation;
+@property (strong, nonatomic, readwrite) UIImage* bgImage;
 
 -(void) removeMyLocation;
 
