@@ -414,9 +414,9 @@
     
     if([request wasSentToResourcePath:[constants getPinsFromDBURL]]){
         
-        [self performSelectorInBackground:@selector(handlePinQueryResponse:) withObject:response];
+        //[self performSelectorInBackground:@selector(handlePinQueryResponse:) withObject:response];
         // detachnewthread to handle pinQuery stuff in the background
-        //[self handlePinQueryResponse:response];
+        [self handlePinQueryResponse:response];
     }
     else if([[response bodyAsString] isEqualToString:[constants deletePinSuccessResponse]]){
         NSLog(@"pin deleted from DB successfully");
