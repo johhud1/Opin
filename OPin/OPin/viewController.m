@@ -14,6 +14,7 @@
 @implementation viewController {
 }
 
+@synthesize mUsername;
 @synthesize myToolbar;
 @synthesize myNewComment;
 @synthesize myLocManager;
@@ -36,6 +37,7 @@
     myLocManager = [(AppDelegate *)[[UIApplication sharedApplication] delegate] locationManager];
     textViewVisible = NO;
     NSLog([[NSUserDefaults standardUserDefaults] stringForKey:@"username"]);
+    mUsername = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
     [[self navigationController] setToolbarHidden:YES];
     //NSTimer* refreshPinsTimer = 
     [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(getPinsFromDB) userInfo:nil repeats:YES];
@@ -263,14 +265,33 @@
 //  
     }
 
-    //annView.animatesDrop = YES;
+    //setup callout detail button
     UIButton* calloutDetailButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     int buttonTag = [[(AddressAnnotation*)annotation pin_id] intValue];
     NSLog(@"in mapView:viewForAnnotation; annotation.pin_id is %d, and myCurrentAnn.pin_id is %@", buttonTag, [myCurrentAnn pin_id]);
     [calloutDetailButton setTag:buttonTag];
     [annView setTag:buttonTag];
     [calloutDetailButton addTarget:self action:@selector(pushToDetailView:) forControlEvents:UIControlEventTouchUpInside];
-    annView.rightCalloutAccessoryView = calloutDetailButton;
+    
+    //set calloutDetailView button to right detail view of callout
+    [annView setRightCalloutAccessoryView:calloutDetailButton];
+    
+    //setup callout like button
+    UIButton* likeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [likeButton setTag:buttonTag];
+    [likeButton addTarget:self action:@selector(likeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [likeButton setAdjustsImageWhenDisabled:NO];
+    //get 'button can be pressed' image
+    UIImage* canLikeImage = [UIImage imageNamed:[constants handCanLike]];
+    CGSize canLikeSize = [canLikeImage size];
+    UIImage* alreadyLikedImage = [UIImage imageNamed:[constants handAlreadyLiked]];
+    
+    [likeButton setFrame:CGRectMake(0, 0, canLikeSize.width, canLikeSize.height)];
+    [likeButton setImage:canLikeImage forState:UIControlStateNormal];
+    [likeButton setImage:alreadyLikedImage forState:UIControlStateDisabled];
+    //set calloutLikeButton to left detail view of callout
+    [annView setLeftCalloutAccessoryView:likeButton];
+    
     return annView;
 }
 //- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
@@ -278,6 +299,19 @@
 //    [control setTag:[view tag]];
 //    NSLog(@"MKAnnotationView tag is %d, and UIControl (callout detail button) tag is %d", [view tag], [control tag]);
 //}
+-(void)likeButtonPressed:(id)likeButton{
+    NSNumber* mTag = [[NSNumber alloc] initWithInt:[likeButton tag]];
+
+    NSString* sPin_id = [[NSString alloc] initWithFormat:@"%@", mTag];
+    NSLog(@"like button has been pushed, disabling, tag is %d", [likeButton tag]);
+
+    [likeButton setEnabled:NO];
+    //send 'like' off to server.
+    
+    NSString* likeFinalURL = [[NSString alloc] initWithFormat:@"%@/%@/%@", [constants likeURL], sPin_id, mUsername];
+    NSLog(@"making like request to url %@", likeFinalURL);
+    [[RKClient sharedClient] requestWithResourcePath:likeFinalURL delegate:self];
+}
 
 -(void)pushToDetailView:(UIButton*)sender{
     NSLog(@"push to detail View SUCCESS, tag is %d", [sender tag]);
@@ -291,7 +325,7 @@
     UIImage* myMapImage2 = [UIImage alloc];
     [myMap.layer renderInContext:UIGraphicsGetCurrentContext()];
     myMapImage2 = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();   
+    UIGraphicsEndImageContext();
     UIGraphicsBeginImageContext(myMap.frame.size);
     [myMap.layer renderInContext:UIGraphicsGetCurrentContext()];
     myMapImage2 = UIGraphicsGetImageFromCurrentImageContext();
@@ -405,6 +439,9 @@
     }
     else if([[response bodyAsString] isEqualToString:[constants deletePinSuccessResponse]]){
         NSLog(@"pin deleted from DB successfully");
+    }
+    else if([[response bodyAsString] isEqualToString:[constants likePinSuccessResponse]]){
+        NSLog(@"pin liked at DB successfully");
     }
     else{
         [self handleCreatePinResponse:response];

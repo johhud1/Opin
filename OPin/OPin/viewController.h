@@ -29,6 +29,7 @@
 
 - (void)setAnnotation:(AddressAnnotation*)annotation withDateString:(NSString*)dateStr;
 - (void)pushToDetailView:(id)sender;
+- (void)likeButtonPressed:(id)likeButton;
 - (void)slideInTV;
 - (void)slideOutTV;
 - (void)cancelPost;
@@ -50,6 +51,7 @@ extern UIImage* myMapImage2;
 
 @property (weak, nonatomic) IBOutlet UIToolbar *myToolbar;
 
+@property (strong, readwrite, nonatomic) NSString* mUsername;
 @property (strong, readwrite) Comment* myNewComment;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *upperRightToolBut;
 @property (readwrite) BOOL textViewVisible;

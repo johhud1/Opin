@@ -21,5 +21,9 @@
 + (NSString*) getJSONAuthorKey;
 + (NSString*) deletePinFromDBURL;
 + (NSString*) deletePinSuccessResponse;
++ (NSString*) handCanLike;
++ (NSString*) handAlreadyLiked;
++ (NSString*) likeURL;
++ (NSString*) likePinSuccessResponse;
 
 @end

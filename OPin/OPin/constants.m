@@ -20,8 +20,24 @@ static NSString* getCommentsFromDBURL = @"/getComments/";
 static NSString* jsonCommentKey = @"comment";
 static NSString* jsonAuthorKey = @"author";
 static NSString* deletePinFromDBURL = @"/deletePin/";
+static NSString* likeURL = @"/like";
 static NSString* deletePinResponseSuccess = @"deletePin success";
+static NSString* likePinResponseSuccess = @"pinLiked success";
+static NSString* handAlreadyLiked = @"okHandOrange.png";
+static NSString* handCanLike = @"okHandWhite.png";
 
++(NSString*) likeURL{
+    return likeURL;
+}
++(NSString*) likePinSuccessResponse{
+    return likePinResponseSuccess;
+}
++(NSString*) handCanLike{
+    return handCanLike;
+}
++(NSString*) handAlreadyLiked{
+    return handAlreadyLiked;
+}
 + (NSString*) deletePinSuccessResponse{
     return deletePinResponseSuccess;
 }
