@@ -43,6 +43,20 @@
     [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(getPinsFromDB) userInfo:nil repeats:YES];
     self.navigationItem.title = @"OPin";
     isRemovePinBarItemSet = FALSE;
+    
+    [self.navigationController setToolbarHidden:NO animated:YES];
+    UIBarButtonItem *flexibaleSpaceBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    
+    UIBarButtonItem *areaListButton = [[UIBarButtonItem alloc] initWithTitle:@"List" 
+                                                                       style:UIBarButtonItemStyleBordered 
+                                                                      target:self 
+                                                                      action: @selector(pushToAreaListView:)];
+                                       
+    self.toolbarItems = [NSArray arrayWithObjects:flexibaleSpaceBarButton, areaListButton, nil];
+    
+    //[areaListBut addTarget:self action: @selector(pushToAreaListView::) forControlEvents:UIControlEventTouchUpInside];
+
 
     [self jumpToMyLoc];
     
@@ -120,8 +134,8 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    //return (interfaceOrientation == UIInterfaceOrientationPortrait);
-    return YES;
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    //return YES;
     //return YES;
 }
 
@@ -338,6 +352,7 @@
     [tableView setPin_id:[sender tag]];
     [tableView setBgImage:myMapImage2];
     [self.navigationController pushViewController:tableView animated:YES];
+    
 }
 
     //remove previous post
@@ -553,6 +568,9 @@
 }
 
 
+
+
+
 -(NSMutableArray*) getAnnotationIDs:(NSArray *)annotations{
     AddressAnnotation* annotation;
     NSMutableArray* annotationIDs = [[NSMutableArray alloc] init];
@@ -586,13 +604,58 @@
 
 - (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
     NSLog(@"in didRotatefromInterfaceOrientation");
+    
+          
+
 
     if(fromInterfaceOrientation == UIDeviceOrientationPortrait){
+        if(UIGraphicsBeginImageContextWithOptions != NULL)
+        {
+            UIGraphicsBeginImageContextWithOptions(myMap.frame.size, NO, 0.0);
+        } else {
+            UIGraphicsBeginImageContext(myMap.frame.size);
+        }
+        UIImage* myMapImage2 = [UIImage alloc];
+        [myMap.layer renderInContext:UIGraphicsGetCurrentContext()];
+        myMapImage2 = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();   
+        UIGraphicsBeginImageContext(myMap.frame.size);
+        [myMap.layer renderInContext:UIGraphicsGetCurrentContext()];
+        myMapImage2 = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext(); 
+
        topicList* topicList = [self.storyboard instantiateViewControllerWithIdentifier:@"topicList"];
         [topicList setPinAnnotationArray:[myMap annotations]];
+//
+        [topicList setBgImage:myMapImage2];
        [self.navigationController pushViewController:topicList animated:YES];
     }
 }
+
+- (void)pushToAreaListView:(id)sender{
+    if(UIGraphicsBeginImageContextWithOptions != NULL)
+    {
+        UIGraphicsBeginImageContextWithOptions(myMap.frame.size, NO, 0.0);
+    } else {
+        UIGraphicsBeginImageContext(myMap.frame.size);
+    }
+    UIImage* myMapImage2 = [UIImage alloc];
+    [myMap.layer renderInContext:UIGraphicsGetCurrentContext()];
+    myMapImage2 = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();   
+    UIGraphicsBeginImageContext(myMap.frame.size);
+    [myMap.layer renderInContext:UIGraphicsGetCurrentContext()];
+    myMapImage2 = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext(); 
+    
+    topicList* topicList = [self.storyboard instantiateViewControllerWithIdentifier:@"topicList"];
+    [topicList setPinAnnotationArray:[myMap annotations]];
+    //
+    [topicList setBgImage:myMapImage2];
+    [self.navigationController pushViewController:topicList animated:YES];
+    
+}
+
 
 
 @end

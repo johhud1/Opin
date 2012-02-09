@@ -14,6 +14,7 @@
 
 @synthesize pinAnnotationArray;
 @synthesize pastMKUserAnnotation;
+@synthesize bgImage;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -38,6 +39,18 @@
 {
     [super viewDidLoad];
     [self removeMyLocation];
+    //[[self navigationController] setToolbarHidden:YES];
+    //self.navigationItem.hidesBackButton = YES;
+    
+    self.navigationItem.title = @"Hot Pins";
+    
+    UIImageView* backGroundView = [[UIImageView alloc] initWithImage:bgImage];
+    UIView* overlay = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 480, 480)];
+    [overlay setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:.8]];
+    [backGroundView addSubview:overlay];    
+    self.tableView.backgroundView = backGroundView;
+    //self.tableView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.8];
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -102,6 +115,11 @@
     return [pinAnnotationArray count];
 }
 
+//-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+//    cell.backgroundColor = [UIColor clearColor];
+//}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"in tableview cellforrowatindex path. annotation array is %@", pinAnnotationArray);
@@ -128,6 +146,11 @@
     [dateFormat setDateFormat:@" E, hh:ssa"];
     NSString* user = [pinAddressAnnotation title];
     NSString* title = [NSString stringWithFormat:@"%@ - %@", user, [dateFormat stringFromDate:[pinAddressAnnotation pub_date]]];
+    
+    //set color of text
+    [cell.textLabel setTextColor: [UIColor whiteColor]];
+    [cell.detailTextLabel setTextColor:[UIColor whiteColor]];
+    
     [cell.textLabel setText:title];
     [cell.detailTextLabel setText:[pinAddressAnnotation subtitle]];
     

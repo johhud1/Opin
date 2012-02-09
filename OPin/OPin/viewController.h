@@ -25,6 +25,7 @@
 @interface viewController : UIViewController <MKMapViewDelegate, UITextViewDelegate, RKRequestDelegate>{
     MKUserLocation* myUserLocation;
     NSTimer* refreshPinsTimer;
+    
 }
 
 - (void)setAnnotation:(AddressAnnotation*)annotation withDateString:(NSString*)dateStr;
@@ -44,6 +45,7 @@
 - (void) invalidateAnnotationPins:(NSArray*)CoreDataPins;
 - (NSMutableArray*) getAnnotationIDs:(NSArray*)annotations;
 - (void) removeInvalidAnnotations:(NSArray*)annotations;
+- (void)pushToAreaListView:(id)sender;
 
 
 extern UIImage* myMapImage2;
