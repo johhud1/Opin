@@ -14,6 +14,7 @@
 
 @implementation tableViewController
 
+@synthesize tableView;
 @synthesize bgImage;
 @synthesize myPinEnt;
 @synthesize commentArray;
@@ -22,10 +23,16 @@
 @synthesize thisPin;
 @synthesize Pin_id;
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithStyle:(UITableViewStyle)style Frame:(CGRect)frame
 {
-    self = [super initWithStyle:style];
-
+    UITableView* _tableView = [[UITableView alloc] initWithFrame:frame style:style];
+    [self setTableView:_tableView];
+    [[self tableView] setBackgroundColor:[UIColor blackColor]];
+    [self setView:tableView];
+    [tableView setDelegate:self];
+    [tableView setDataSource:self];
+    [tableView setRowHeight:104];
+    
     if (self) {
         // Custom initialization
         
@@ -46,7 +53,7 @@
     
     
     //hide back button for transfer button
-    self.navigationItem.hidesBackButton = TRUE;
+    //self.navigationItem.hidesBackButton = TRUE;
     
     
     //ADD A CANCEL BUTTON FOR WHEN TABLE GOES INTO EDITING MODE
@@ -54,9 +61,9 @@
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
 //                                                                                          target:self action:@selector(textViewShouldEndEditing: textView)] ;
 
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPost)];
-    [self.navigationItem.leftBarButtonItem setTintColor:[UIColor colorWithRed:0.7f green:0.3f blue:0.3f alpha:1]];
-    //CREATE SHADOW TO ALLOW CELL TO STICK OUT
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPost)];
+//    [self.navigationItem.leftBarButtonItem setTintColor:[UIColor colorWithRed:0.7f green:0.3f blue:0.3f alpha:1]];
+//    //CREATE SHADOW TO ALLOW CELL TO STICK OUT
     textView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:.2] ;
     textView.textColor = [UIColor whiteColor];
     textView.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -70,10 +77,10 @@
     //CREATE BORDER
     textView.layer.borderColor = [[UIColor whiteColor] CGColor];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveComment)];
-    self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
-
-    [self.navigationItem.rightBarButtonItem setEnabled:NO];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveComment)];
+//    self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
+//
+//    [self.navigationItem.rightBarButtonItem setEnabled:NO];
     return YES;
     
 }
@@ -81,12 +88,12 @@
 - (BOOL) textViewShouldEndEditing:(UITextView *)textView{
     
     //delete cancel button
-    self.navigationItem.leftBarButtonItem = nil;
-
-    textView.layer.borderWidth = 0;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(startComment)];
-    self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
-
+//    self.navigationItem.leftBarButtonItem = nil;
+//
+//    textView.layer.borderWidth = 0;
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(startComment)];
+//    self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
+//
     
 
     return YES;
@@ -104,15 +111,15 @@
 }
 
 -(void)textViewDidChange:(UITextView *)textView{
-    NSInteger restrictedLength=140;
-    NSString *temp=textView.text;
-    if(temp.length != 0){
-        [self.navigationItem.rightBarButtonItem setEnabled:YES];
-    }
-    else [self.navigationItem.rightBarButtonItem setEnabled:NO];
-    if([temp length] > restrictedLength){
-        textView.text=[temp substringToIndex:[temp length]-1];
-    } 
+//    NSInteger restrictedLength=140;
+//    NSString *temp=textView.text;
+//    if(temp.length != 0){
+//        [self.navigationItem.rightBarButtonItem setEnabled:YES];
+//    }
+//    else [self.navigationItem.rightBarButtonItem setEnabled:NO];
+//    if([temp length] > restrictedLength){
+//        textView.text=[temp substringToIndex:[temp length]-1];
+//    } 
 }
 
 - (void) saveComment{
@@ -125,7 +132,7 @@
     UITextView* editText = [self getCurrentEditCommentCellEditText];
     Comment* newComment = [[Comment alloc] initWithMessage:editText.text author:userName];
     NSMutableString* createCommentURL = [[NSMutableString alloc] initWithString:[constants createCommentDBURL]];
-    NSString* sPin_id = [NSString stringWithFormat:@"%d", Pin_id];
+    NSString* sPin_id = [NSString stringWithFormat:@"%d", [Pin_id intValue]];
     [createCommentURL appendString:sPin_id];
     NSDictionary* createCommentParams = [[NSDictionary alloc] initWithObjectsAndKeys:editText.text, @"comment", userName, @"user", nil];
     [[RKClient sharedClient] post:createCommentURL params:createCommentParams delegate:self];
@@ -136,17 +143,17 @@
     [editText resignFirstResponder];
     [[self tableView] reloadData];
     
-    //disable back button to wait for post to finish posting
-    self.navigationItem.hidesBackButton = TRUE;
-    
-    UIActivityIndicatorView *activityIndicator = 
-    [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-    UIBarButtonItem * barButton = 
-    [[UIBarButtonItem alloc] initWithCustomView:activityIndicator];
-    
-    // Set to Left or Right
-    [[self navigationItem] setLeftBarButtonItem: barButton];
-    [activityIndicator startAnimating];
+//    //disable back button to wait for post to finish posting
+//    self.navigationItem.hidesBackButton = TRUE;
+//    
+//    UIActivityIndicatorView *activityIndicator = 
+//    [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+//    UIBarButtonItem * barButton = 
+//    [[UIBarButtonItem alloc] initWithCustomView:activityIndicator];
+//    
+//    // Set to Left or Right
+//    [[self navigationItem] setLeftBarButtonItem: barButton];
+//    [activityIndicator startAnimating];
 
     
 }
@@ -162,9 +169,9 @@
     editText.backgroundColor = [UIColor clearColor];
     editText.layer.shadowColor = [UIColor clearColor].CGColor;
     [editText resignFirstResponder];
-    [[self navigationItem] setLeftBarButtonItem:nil];
-
-    self.navigationItem.hidesBackButton = FALSE;
+   // [[self navigationItem] setLeftBarButtonItem:nil];
+//
+//    self.navigationItem.hidesBackButton = FALSE;
 
     NSLog(@"cancel post");
 }
@@ -185,13 +192,13 @@
 
 //    UITextView * textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 100, 32)];
 
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(startComment)];
-    self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
-    UIImageView* backGroundView = [[UIImageView alloc] initWithImage:bgImage];
-    UIView* overlay = [[UIView alloc] initWithFrame: self.navigationController.view.frame];
-    [overlay setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:.8]];
-    [backGroundView addSubview:overlay];    
-    self.tableView.backgroundView = backGroundView;
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(startComment)];
+//    self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
+    //UIImageView* backGroundView = [[UIImageView alloc] initWithImage:bgImage];
+    //UIView* overlay = [[UIView alloc] initWithFrame: self.navigationController.view.frame];
+    //[overlay setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:.8]];
+    //[backGroundView addSubview:overlay];    
+    //self.tableView.backgroundView = backGroundView;
     
     //self.navigationItem.title = thisPin.mAuthor;
 
@@ -215,17 +222,16 @@
     
     //get comments from server
     NSMutableString* getCommentURL = [[NSMutableString alloc] initWithString:[constants getCommentsFromDBURL]];
-    NSString* sPin_id = [NSString stringWithFormat:@"%d", Pin_id];
+    NSString* sPin_id = [NSString stringWithFormat:@"%d", [Pin_id intValue]];
     [getCommentURL appendString:sPin_id];
     NSLog(@"making request to server with url %@", getCommentURL);
     [[RKClient sharedClient] get:getCommentURL delegate:self];
     
     //set activity indicator when grabbing comments
-    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-    UIBarButtonItem * barButton = 
-    [[UIBarButtonItem alloc] initWithCustomView:activityIndicator];
-    [[self navigationItem] setTitleView:activityIndicator];
-    [activityIndicator startAnimating];
+//    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+//    UIBarButtonItem * barButton = [[UIBarButtonItem alloc] initWithCustomView:activityIndicator];
+//    [[self navigationItem] setTitleView:activityIndicator];
+//    [activityIndicator startAnimating];
 
 }
 
@@ -275,11 +281,12 @@
 {
     NSLog(@"in tableview cellforRowIndex Path");
     UITableViewCell* cell;
-    
+
     if(indexPath.row == ([[self commentArray] count])){
-        
         cell = [tableView dequeueReusableCellWithIdentifier:@"addCommentCell"];
-    
+        if(cell == nil){
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStateEditingMask reuseIdentifier:@"addCommentCell"];
+        }
     }
     else{
         static NSString *CellIdentifier = @"commentCell";
@@ -300,14 +307,17 @@
             NSString* title = [NSString stringWithFormat:@"%@ - %@", user, [dateFormat stringFromDate:[comment mTimestamp]]];
             [cell.textLabel setText:title];
         }
+        [[cell detailTextLabel] setTextColor:[UIColor whiteColor]];
+        [[cell textLabel] setTextColor:[UIColor whiteColor]];
     }
+    NSLog(@"return cell %@", cell);
     return cell;
 }
 
 - (void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response{
     NSLog(@"in tableViewController request, did load response. request was %@, and response was %@", request.HTTPBodyString, response.bodyAsString);
     NSMutableString* createCommentURL = [[NSMutableString alloc] initWithString:[constants createCommentDBURL]];
-    NSString* sPin_id = [NSString stringWithFormat:@"%d", Pin_id];
+    NSString* sPin_id = [NSString stringWithFormat:@"%d", [Pin_id intValue]];
     [createCommentURL appendString:sPin_id];
     NSMutableString* getCommentsUrl = [[NSMutableString alloc] initWithString:[constants getCommentsFromDBURL]];
     [getCommentsUrl appendString:sPin_id];
@@ -320,9 +330,9 @@
     }
     
     //RECREATE BACK BUTTON COMMENT HAS BEEN POSTED
-    [[self navigationItem] setLeftBarButtonItem:nil];
+    //[[self navigationItem] setLeftBarButtonItem:nil];
     //[activityIndicator stopAnimating];
-    self.navigationItem.hidesBackButton = FALSE;
+    //self.navigationItem.hidesBackButton = FALSE;
 
 }
 - (void) handleGetCommentsResponse:(RKResponse*) response{
@@ -351,7 +361,7 @@
     [self setCommentArray:responseCommentArray];
     [[self tableView] reloadData];
     
-    [[self navigationItem] setTitleView:nil];
+    //[[self navigationItem] setTitleView:nil];
     //re-enable back button signaling comment is stored in db
     //[[[self navigationItem] leftBarButtonItem] setEnabled:TRUE];
     

@@ -14,24 +14,27 @@
 #import "Comment.h"
 #import "addCommentTableViewCell.h"
 
-@interface tableViewController : UITableViewController <UITextViewDelegate, RKRequestDelegate> {
-
+@interface tableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, RKRequestDelegate> {
+    //IBOutlet UITableView* tableView;
 }
+
+-(id)initWithStyle:(UITableViewStyle)style Frame:(CGRect)frame;
 -(void) startComment;
 
 -(void) saveComment;
 -(UITextView*) getCurrentEditCommentCellEditText;
 -(void) handleGetCommentsResponse:(RKResponse*)response;
+//-(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
+//@property (weak, nonatomic, readwrite) UITableView* tableView;
 @property (strong, nonatomic, readwrite) UIImage* bgImage;
-@property (nonatomic, readwrite) int Pin_id;
+@property (strong, nonatomic, readwrite) NSNumber* Pin_id;
 @property (strong, nonatomic, readwrite) PinEnt* myPinEnt;
 @property (strong, nonatomic, readwrite) Pin* thisPin;
 @property (strong, nonatomic, readwrite) NSMutableArray* commentArray;
 @property (strong, nonatomic, readwrite) NSManagedObjectContext* managedObjectContext;
 @property (weak, nonatomic) IBOutlet UITextView *addComment_TV;
-//@property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+@property (weak, nonatomic, readwrite) IBOutlet UITableView* tableView;
 
 - (void)cancelPost;
 
