@@ -52,6 +52,8 @@
     UIColor *backgroundColor = [[UIColor alloc] initWithPatternImage:backgroundImage];
     //self.backgroundColor = backgroundColor;
     self.navigationController.view.backgroundColor = backgroundColor;    
+    [self.navigationController setToolbarHidden:YES animated:YES];
+
     //[backGroundView setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.5]];  
     
 }

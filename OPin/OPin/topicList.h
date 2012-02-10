@@ -18,5 +18,6 @@
 @property (strong, nonatomic, readwrite) UIImage* bgImage;
 
 -(void) removeMyLocation;
+-(void) pushToMapView:(id) sender;
 
 @end

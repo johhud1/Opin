@@ -33,19 +33,22 @@
     
     //we must REASIGN THE CURRENT ANNOTATION IN THE VIEW DID LOAD :D
     //[self setMyCurrentAnn: myCurrentAnn];
-    
+
     myLocManager = [(AppDelegate *)[[UIApplication sharedApplication] delegate] locationManager];
     textViewVisible = NO;
     NSLog([[NSUserDefaults standardUserDefaults] stringForKey:@"username"]);
     mUsername = [[NSUserDefaults standardUserDefaults] stringForKey:@"username"];
-    [[self navigationController] setToolbarHidden:YES];
+    //[[self navigationController] setToolbarHidden:YES];
     //NSTimer* refreshPinsTimer = 
     [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(getPinsFromDB) userInfo:nil repeats:YES];
-    self.navigationItem.title = @"OPin";
+    
+    self.navigationItem.title = @"Opin";
     isRemovePinBarItemSet = FALSE;
     
     [self.navigationController setToolbarHidden:NO animated:YES];
     UIBarButtonItem *flexibaleSpaceBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    self.navigationItem.hidesBackButton = TRUE;
     
     
     UIBarButtonItem *areaListButton = [[UIBarButtonItem alloc] initWithTitle:@"List" 
@@ -136,6 +139,7 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
     //return YES;
+
     //return YES;
 }
 
@@ -151,6 +155,8 @@
 }
 
 - (void)slideOutTV{
+    [self jumpToMyLoc];
+
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                           target:self action:@selector(cancelPost)];
     [self.navigationItem.leftBarButtonItem setTintColor:[UIColor colorWithRed:0.7f green:0.3f blue:0.3f alpha:1]];
@@ -198,7 +204,7 @@
 - (void)slideInTV{
 
     [animateView resignFirstResponder];
-    [UIView animateWithDuration:.7 animations:
+    [UIView animateWithDuration:.3 animations:
      ^{
          //self.navigationItem.leftBarButtonItem = nil;
          animateView.frame = CGRectMake(0, -80, 320, 69);
@@ -602,35 +608,6 @@
     [annotation setPub_date:date];
 }
 
-- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
-    NSLog(@"in didRotatefromInterfaceOrientation");
-    
-          
-
-
-    if(fromInterfaceOrientation == UIDeviceOrientationPortrait){
-        if(UIGraphicsBeginImageContextWithOptions != NULL)
-        {
-            UIGraphicsBeginImageContextWithOptions(myMap.frame.size, NO, 0.0);
-        } else {
-            UIGraphicsBeginImageContext(myMap.frame.size);
-        }
-        UIImage* myMapImage2 = [UIImage alloc];
-        [myMap.layer renderInContext:UIGraphicsGetCurrentContext()];
-        myMapImage2 = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();   
-        UIGraphicsBeginImageContext(myMap.frame.size);
-        [myMap.layer renderInContext:UIGraphicsGetCurrentContext()];
-        myMapImage2 = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext(); 
-
-       topicList* topicList = [self.storyboard instantiateViewControllerWithIdentifier:@"topicList"];
-        [topicList setPinAnnotationArray:[myMap annotations]];
-//
-        [topicList setBgImage:myMapImage2];
-       [self.navigationController pushViewController:topicList animated:YES];
-    }
-}
 
 - (void)pushToAreaListView:(id)sender{
     if(UIGraphicsBeginImageContextWithOptions != NULL)

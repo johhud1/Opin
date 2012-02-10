@@ -9,6 +9,8 @@
 #import "topicList.h"
 #import "AddressAnnotation.h"
 #import "tableViewController.h"
+#import "viewController.h"
+#import "AppDelegate.h"
 
 @implementation topicList
 
@@ -40,7 +42,7 @@
     [super viewDidLoad];
     [self removeMyLocation];
     //[[self navigationController] setToolbarHidden:YES];
-    //self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.hidesBackButton = YES;
     
     self.navigationItem.title = @"Hot Pins";
     
@@ -49,6 +51,19 @@
     [overlay setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:.8]];
     [backGroundView addSubview:overlay];    
     self.tableView.backgroundView = backGroundView;
+    
+    
+    UIBarButtonItem *flexibaleSpaceBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    
+    UIBarButtonItem *backToMap = [[UIBarButtonItem alloc] initWithTitle:@"Map" 
+                                                                       style:UIBarButtonItemStyleBordered 
+                                                                      target:self 
+                                                                      action: @selector(pushToMapView:)];
+    
+    self.toolbarItems = [NSArray arrayWithObjects:flexibaleSpaceBarButton, backToMap, nil];
+
+
     //self.tableView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.8];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -57,6 +72,16 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+-(void) pushToMapView:(id) sender{
+    viewController* mapViewCont = [self.storyboard instantiateViewControllerWithIdentifier:@"mapViewCont"];
+
+    //topicList* topicList = [self.storyboard instantiateViewControllerWithIdentifier:@"topicList"];
+
+    [self.navigationController pushViewController:mapViewCont animated:YES];
+
+}
+
 -(void) removeMyLocation{
     for(AddressAnnotation* annotation in pinAnnotationArray){
         if([annotation isKindOfClass:[MKUserLocation class]]){
@@ -129,7 +154,10 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    
+
+    cell.backgroundColor = [UIColor clearColor];
+    //rowheight = 104; 
+
     NSInteger index = indexPath.row;
     AddressAnnotation* pinAddressAnnotation = [pinAnnotationArray objectAtIndex:index];
     
