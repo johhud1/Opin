@@ -46,6 +46,7 @@
 - (NSMutableArray*) getAnnotationIDs:(NSArray*)annotations;
 - (void) removeInvalidAnnotations:(NSArray*)annotations;
 - (void)pushToAreaListView:(id)sender;
+-(void) slideMapDown:(int)pixels;
 
 
 extern UIImage* myMapImage2;
@@ -65,4 +66,5 @@ extern UIImage* myMapImage2;
 @property (strong, nonatomic, readwrite) PinEnt* myCurrentPinEnt;
 @property (strong, nonatomic, readwrite) AddressAnnotation* myCurrentAnn;
 @property (nonatomic, readwrite) BOOL isRemovePinBarItemSet;
+@property (nonatomic, strong, readwrite) tableViewController* mTableViewController;
 @end

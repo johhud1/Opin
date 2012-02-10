@@ -202,13 +202,13 @@
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="0Yr-Vp-5if" id="myB-zU-jMx"/>
-                            <outlet property="delegate" destination="0Yr-Vp-5if" id="jSw-NE-KRu"/>
+                            <outlet property="dataSource" destination="0Yr-Vp-5if" id="EUO-mX-wng"/>
+                            <outlet property="delegate" destination="0Yr-Vp-5if" id="NUA-89-Zm8"/>
                         </connections>
                     </tableView>
                     <toolbarItems/>
                     <connections>
-                        <outlet property="tableView" destination="oNj-kG-KeF" id="nNc-Rk-MLt"/>
+                        <outlet property="tableView" destination="oNj-kG-KeF" id="PPs-qy-my4"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -283,10 +283,11 @@
                 <relationship kind="outlet" name="username_tf" candidateClass="UITextField"/>
             </relationships>
         </class>
-        <class className="tableViewController" superclassName="UITableViewController">
+        <class className="tableViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/tableViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="addComment_TV" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
         <class className="topicList" superclassName="UITableViewController">
