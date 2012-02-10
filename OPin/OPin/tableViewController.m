@@ -31,7 +31,7 @@
     [self setView:tableView];
     [tableView setDelegate:self];
     [tableView setDataSource:self];
-    [tableView setRowHeight:104];
+    [tableView setRowHeight:80];
     
     if (self) {
         // Custom initialization
@@ -283,7 +283,7 @@
     UITableViewCell* cell;
 
     if(indexPath.row == ([[self commentArray] count])){
-        cell = [tableView dequeueReusableCellWithIdentifier:@"addCommentCell"];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"commentCell"];
         if(cell == nil){
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStateEditingMask reuseIdentifier:@"addCommentCell"];
         }

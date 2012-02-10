@@ -46,22 +46,19 @@
     self.navigationItem.title = @"Opin";
     isRemovePinBarItemSet = FALSE;
     
-    [self.navigationController setToolbarHidden:NO animated:YES];
+    //[self.navigationController setToolbarHidden:NO animated:YES];
     UIBarButtonItem *flexibaleSpaceBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-<<<<<<< HEAD
     self.navigationItem.hidesBackButton = TRUE;
     
-=======
     NSLog(@"about to instantiate tableviewcontroller");
-    mTableViewController = [[tableViewController alloc] initWithStyle:UITableViewStylePlain Frame:CGRectMake(0, 0, 320, 104)];
+    mTableViewController = [[tableViewController alloc] initWithStyle:UITableViewStylePlain Frame:CGRectMake(0, 0, 320, 80)];
     //[[tableViewController navigationController] setHidesBottomBarWhenPushed:NO];
     [mTableViewController setCommentArray:[[NSMutableArray alloc] initWithObjects:myNewComment, nil]];
     UITableView* tableView = (UITableView*)[mTableViewController view];
     [tableView setHidden:YES];
     NSLog(@"added tableview as a subview");
     [[self view] addSubview:tableView];
->>>>>>> bc08056de471af9ec1fb9eae64fb59249eaaf3d2
     
     UIBarButtonItem *areaListButton = [[UIBarButtonItem alloc] initWithTitle:@"List" 
                                                                        style:UIBarButtonItemStyleBordered 
@@ -270,6 +267,8 @@
         isRemovePinBarItemSet = FALSE;
     }
     if(![[view annotation] isKindOfClass:[MKUserLocation class]]){
+        [NSObject cancelPreviousPerformRequestsWithTarget:self];
+
         //int mPin_id = [[(AddressAnnotation*)[view annotation] pin_id] intValue];
         [mTableViewController setPin_id:[(AddressAnnotation*)[view annotation] pin_id]];
         NSLog(@"making tableview with pin_id %@", [mTableViewController Pin_id]);
@@ -277,26 +276,39 @@
         [[self view] bringSubviewToFront:[mTableViewController tableView]];
         [mTableViewController viewWillAppear:NO];
         [[mTableViewController tableView] setScrollEnabled:NO];
-        [self slideMapDown:104];
+        [self slideMapDown:80];
     }
 }
 
 -(void) slideMapDown:(int)pixels{
     [UIView animateWithDuration:.4 animations:
      ^{
-         [[self myMap] setFrame:CGRectMake(0, 104, 320, 400)];
+         [[self myMap] setFrame:CGRectMake(0, 80, 320, 400)];
         }
     completion:^(BOOL finished){
         NSLog(@"done sliding map down");
     }];
 }
 
+-(void) slideMapUp:(int)pixels{
+    [UIView animateWithDuration:.4 animations:^{
+            [[self myMap] setFrame:CGRectMake(0, 0, 320, 415)];
+        }
+    completion:^(BOOL finished){
+        NSLog(@"slide in map");
+    }];
+}
+
+
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view{
     if(!textViewVisible){
         self.navigationItem.leftBarButtonItem = nil;
         isRemovePinBarItemSet = FALSE;
     }
+
     [[mTableViewController tableView] setHidden:YES];
+    
+    [self performSelector:@selector(slideMapUp:) withObject:nil afterDelay:0.3];
 }
 
 - (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation{
@@ -305,7 +317,7 @@
     }
     MKPinAnnotationView *annView=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"myPin"];
     //[annView release];
-    annView.canShowCallout = YES;
+    //annView.canShowCallout = YES;
     if([(AddressAnnotation*) annotation isMyPin]){
         annView.image = [UIImage imageNamed:[NSString stringWithFormat:@"opinPinSMALL.png"]];
     }
