@@ -48,8 +48,9 @@
 - (void)pushToAreaListView:(id)sender;
 -(void) slideMapTo:(int)pixels;
 -(void) slideMapBottomUp:(int)pixels;
--(void) handleSwipe:(UISwipeGestureRecognizer*)sender;
+-(void) handleSwipe:(UISwipeGestureRecognizer*) sender;
 -(void) createGestureRecognizers;
+
 extern UIImage* myMapImage2;
  
 
@@ -67,7 +68,7 @@ extern UIImage* myMapImage2;
 @property (strong, nonatomic, readwrite) PinEnt* myCurrentPinEnt;
 @property (strong, nonatomic, readwrite) AddressAnnotation* myCurrentAnn;
 @property (nonatomic, readwrite) BOOL isRemovePinBarItemSet;
-@property (nonatomic, strong, readwrite) tableViewController* mTableViewController;
+@property (nonatomic, strong, readwrite) UITableViewController* mTableViewController;
 @property (nonatomic, readwrite) BOOL isTableFullScreen;
-@property (nonatomic, strong) UISwipeGestureRecognizer* tableSwipeGestureRecognizer;
+@property (nonatomic, strong) UISwipeGestureRecognizer* tableSwipeDownGestureRecognizer;
 @end

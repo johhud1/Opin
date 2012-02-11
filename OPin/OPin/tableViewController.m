@@ -22,16 +22,27 @@
 @synthesize addComment_TV;
 @synthesize thisPin;
 @synthesize Pin_id;
+@synthesize myViewController;
+@synthesize swipeUpTab;
+@synthesize selectedAnn;
 
-- (id)initWithStyle:(UITableViewStyle)style Frame:(CGRect)frame
+- (id)initWithStyle:(UITableViewStyle)style Frame:(CGRect)frame ViewController:(viewController *)vc
 {
     UITableView* _tableView = [[UITableView alloc] initWithFrame:frame style:style];
     [self setTableView:_tableView];
+    myViewController = vc;
     [[self tableView] setBackgroundColor:[UIColor blackColor]];
     [self setView:tableView];
+    CGRect swipeUpRect = CGRectMake(0, CGRectGetMaxY([[self view] frame])-100, CGRectGetWidth([[self view] frame]), 100);
+    [self setSwipeUpTab:[[UIView alloc] initWithFrame:swipeUpRect]];
+    [[self view] addSubview:swipeUpTab];
+    [[self view] bringSubviewToFront:swipeUpTab];
+    [swipeUpTab setBackgroundColor:[UIColor grayColor]];
+    
     [tableView setDelegate:self];
     [tableView setDataSource:self];
     [tableView setRowHeight:80];
+    [self createGestureRecognizers];
     
     if (self) {
         // Custom initialization
@@ -39,6 +50,24 @@
     }
     return self;
     
+}
+
+-(void) createGestureRecognizers{
+    UISwipeGestureRecognizer* tableSwipeDownGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    [tableSwipeDownGestureRecognizer setNumberOfTouchesRequired:1];
+    UISwipeGestureRecognizer* tableSwipeUpGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    [tableSwipeDownGestureRecognizer setDirection:UISwipeGestureRecognizerDirectionDown];
+    [tableSwipeUpGestureRecognizer setDirection:UISwipeGestureRecognizerDirectionUp];
+    [[self swipeUpTab] addGestureRecognizer:tableSwipeUpGestureRecognizer];
+    //[[self swipeUpTab] addGestureRecognizer:tableSwipeDownGestureRecognizer];
+    //[[[myMap gestureRecognizers] objectAtIndex:0] requireGestureRecognizerToFail:tableSwipeGestureRecognizer];
+}
+
+-(void) handleSwipe:(UISwipeGestureRecognizer*)sender{
+    if([sender direction] == UISwipeGestureRecognizerDirectionUp){
+        NSLog(@"handling swipe up");
+        [(viewController*)myViewController slideMapTo:80];
+    }
 }
 
 - (void)didReceiveMemoryWarning

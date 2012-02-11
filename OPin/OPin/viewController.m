@@ -29,7 +29,6 @@
 @synthesize isRemovePinBarItemSet;
 @synthesize mTableViewController;
 @synthesize isTableFullScreen;
-@synthesize tableSwipeGestureRecognizer;
 
 -(void)viewDidLoad{
     
@@ -47,7 +46,6 @@
     self.navigationItem.title = @"Opin";
     isRemovePinBarItemSet = FALSE;
     isTableFullScreen = FALSE;
-    [self createGestureRecognizers];
     //[self.navigationController setToolbarHidden:NO animated:YES];
     UIBarButtonItem *flexibaleSpaceBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
@@ -66,14 +64,16 @@
     [self jumpToMyLoc];
     
     NSLog(@"about to instantiate tableviewcontroller");
-    mTableViewController = [[tableViewController alloc] initWithStyle:UITableViewStylePlain Frame:CGRectMake(0, 0, 320, CGRectGetHeight([[self view] frame]))];
+    mTableViewController = [[tableViewController alloc] 
+                            initWithStyle:UITableViewStylePlain Frame:CGRectMake(0, 0, 320, CGRectGetHeight([[self view] frame])) ViewController:self];
     //[[tableViewController navigationController] setHidesBottomBarWhenPushed:NO];
-    [mTableViewController setCommentArray:[[NSMutableArray alloc] initWithObjects:myNewComment, nil]];
+    [(tableViewController*)mTableViewController setCommentArray:[[NSMutableArray alloc] initWithObjects:myNewComment, nil]];
     UITableView* tableView = (UITableView*)[mTableViewController view];
     [tableView setHidden:YES];
     NSLog(@"added tableview as a subview");
     [[self view] addSubview:tableView];
     [[self view] sendSubviewToBack:tableView];
+    [self createGestureRecognizers];
 
 }
 
@@ -81,23 +81,28 @@
     [self getPinsFromDB];
 
 }
+
 -(void) createGestureRecognizers{
-    tableSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-    [tableSwipeGestureRecognizer setNumberOfTouchesRequired:1];
-    [tableSwipeGestureRecognizer setDirection:(UISwipeGestureRecognizerDirectionDown | UISwipeGestureRecognizerDirectionUp)];
-    [[self view] addGestureRecognizer:tableSwipeGestureRecognizer];
-    [[[myMap gestureRecognizers] objectAtIndex:0] requireGestureRecognizerToFail:tableSwipeGestureRecognizer];
+    UISwipeGestureRecognizer* tableSwipeDownGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    [tableSwipeDownGestureRecognizer setNumberOfTouchesRequired:1];
+    UISwipeGestureRecognizer* tableSwipeUpGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    [tableSwipeDownGestureRecognizer setDirection:UISwipeGestureRecognizerDirectionDown];
+    [tableSwipeUpGestureRecognizer setDirection:UISwipeGestureRecognizerDirectionUp];
+    [[self view] addGestureRecognizer:tableSwipeUpGestureRecognizer];
+    [[self view] addGestureRecognizer:tableSwipeDownGestureRecognizer];
+    //[[[myMap gestureRecognizers] objectAtIndex:0] requireGestureRecognizerToFail:tableSwipeGestureRecognizer];
 }
+
 
 -(void) handleSwipe:(UISwipeGestureRecognizer*)sender{
     if([sender direction] == UISwipeGestureRecognizerDirectionDown){
-         NSLog(@"handling swipe down");
-        [self slideMapTo:CGRectGetHeight([[self view] frame])-50];
+        NSLog(@"handling swipe down");
+        [self slideMapTo:CGRectGetHeight([[self view] frame])];
     }
-    else{
-        NSLog(@"handling swipe up");
-        [self slideMapTo:0];
-    }
+//    else if([sender direction] == UISwipeGestureRecognizerDirectionUp){
+//        NSLog(@"handling swipe up");
+//        [self slideMapTo:0];
+//    }
 }
 
 //DISABLE RETURN KEY FOR KEYBOARD OF ANIMATED TEXTFIELD
@@ -294,9 +299,10 @@
     if(![[view annotation] isKindOfClass:[MKUserLocation class]]){
         [NSObject cancelPreviousPerformRequestsWithTarget:self]; 
         [view setImage:[UIImage imageNamed:@"opinPinSelectedTest.png"]];
+        [(tableViewController*)mTableViewController setSelectedAnn:[view annotation]];
         //int mPin_id = [[(AddressAnnotation*)[view annotation] pin_id] intValue];
-        [mTableViewController setPin_id:[(AddressAnnotation*)[view annotation] pin_id]];
-        NSLog(@"making tableview with pin_id %@", [mTableViewController Pin_id]);
+        [(tableViewController*)mTableViewController setPin_id:[(AddressAnnotation*)[view annotation] pin_id]];
+        NSLog(@"making tableview with pin_id %@", [(tableViewController*)mTableViewController Pin_id]);
         [[mTableViewController tableView] setHidden:NO];
         //[[self view] bringSubviewToFront:[mTableViewController tableView]];
         [mTableViewController viewWillAppear:NO];
