@@ -28,10 +28,10 @@
 @synthesize myCurrentPinEnt;
 @synthesize isRemovePinBarItemSet;
 @synthesize mTableViewController;
+@synthesize isTableFullScreen;
+@synthesize tableSwipeGestureRecognizer;
 
 -(void)viewDidLoad{
-    
-  
     
     //we must REASIGN THE CURRENT ANNOTATION IN THE VIEW DID LOAD :D
     //[self setMyCurrentAnn: myCurrentAnn];
@@ -46,7 +46,8 @@
     
     self.navigationItem.title = @"Opin";
     isRemovePinBarItemSet = FALSE;
-    
+    isTableFullScreen = FALSE;
+    [self createGestureRecognizers];
     //[self.navigationController setToolbarHidden:NO animated:YES];
     UIBarButtonItem *flexibaleSpaceBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
@@ -65,19 +66,38 @@
     [self jumpToMyLoc];
     
     NSLog(@"about to instantiate tableviewcontroller");
-    mTableViewController = [[tableViewController alloc] initWithStyle:UITableViewStylePlain Frame:CGRectMake(0, 0, 320, 80)];
+    mTableViewController = [[tableViewController alloc] initWithStyle:UITableViewStylePlain Frame:CGRectMake(0, 0, 320, CGRectGetHeight([[self view] frame]))];
     //[[tableViewController navigationController] setHidesBottomBarWhenPushed:NO];
     [mTableViewController setCommentArray:[[NSMutableArray alloc] initWithObjects:myNewComment, nil]];
     UITableView* tableView = (UITableView*)[mTableViewController view];
     [tableView setHidden:YES];
     NSLog(@"added tableview as a subview");
     [[self view] addSubview:tableView];
+    [[self view] sendSubviewToBack:tableView];
 
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [self getPinsFromDB];
 
+}
+-(void) createGestureRecognizers{
+    tableSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    [tableSwipeGestureRecognizer setNumberOfTouchesRequired:1];
+    [tableSwipeGestureRecognizer setDirection:(UISwipeGestureRecognizerDirectionDown | UISwipeGestureRecognizerDirectionUp)];
+    [[self view] addGestureRecognizer:tableSwipeGestureRecognizer];
+    [[[myMap gestureRecognizers] objectAtIndex:0] requireGestureRecognizerToFail:tableSwipeGestureRecognizer];
+}
+
+-(void) handleSwipe:(UISwipeGestureRecognizer*)sender{
+    if([sender direction] == UISwipeGestureRecognizerDirectionDown){
+         NSLog(@"handling swipe down");
+        [self slideMapTo:CGRectGetHeight([[self view] frame])-50];
+    }
+    else{
+        NSLog(@"handling swipe up");
+        [self slideMapTo:0];
+    }
 }
 
 //DISABLE RETURN KEY FOR KEYBOARD OF ANIMATED TEXTFIELD
@@ -164,7 +184,7 @@
 }
 
 - (void)slideOutTV{
-    [self slideMapUp:80];
+   // [self slideMapTo:80];
     [self jumpToMyLoc];
     
 
@@ -178,7 +198,7 @@
      ^{
          
          [[self view] bringSubviewToFront:animateView];
-         
+         [self slideMapBottomUp:100];
                   //animateView.frame = CGRectMake(0, 0, 320, 69);
          
          //BASE SHADOW LAYER FOR ANIMATEVIEW
@@ -272,40 +292,53 @@
         isRemovePinBarItemSet = FALSE;
     }
     if(![[view annotation] isKindOfClass:[MKUserLocation class]]){
-        [NSObject cancelPreviousPerformRequestsWithTarget:self];
-
+        [NSObject cancelPreviousPerformRequestsWithTarget:self]; 
+        [view setImage:[UIImage imageNamed:@"opinPinSelectedTest.png"]];
         //int mPin_id = [[(AddressAnnotation*)[view annotation] pin_id] intValue];
         [mTableViewController setPin_id:[(AddressAnnotation*)[view annotation] pin_id]];
         NSLog(@"making tableview with pin_id %@", [mTableViewController Pin_id]);
         [[mTableViewController tableView] setHidden:NO];
-        [[self view] bringSubviewToFront:[mTableViewController tableView]];
+        //[[self view] bringSubviewToFront:[mTableViewController tableView]];
         [mTableViewController viewWillAppear:NO];
         [[mTableViewController tableView] setScrollEnabled:NO];
-        [self slideMapDown:80];
+        [self slideMapTo:80];
     }
 }
 
--(void) slideMapDown:(int)pixels{
+-(void) slideMapTo:(int)pixels{
     [UIView animateWithDuration:.4 animations:
      ^{
-         [[self myMap] setFrame:CGRectMake(0, 80, 320, 400)];
+         int height = CGRectGetHeight([[[self navigationController] view] frame]);
+        [[self myMap] setFrame:CGRectMake(0, pixels, 320, height)];
         }
     completion:^(BOOL finished){
         NSLog(@"done sliding map down");
     }];
 }
 
--(void) slideMapUp:(int)pixels{
+-(void) slideMapBottomUp:(int)pixels{
     [UIView animateWithDuration:.4 animations:^{
-
-            [[self myMap] setFrame:CGRectMake(0, 0, 320, 415)];
-        }
+        CGRect mapRect = [myMap frame]; 
+        CGRect newMapRect = CGRectMake(CGRectGetMinX(mapRect), CGRectGetMinY(mapRect), CGRectGetWidth(mapRect), CGRectGetHeight(mapRect)-pixels);
+        [[self myMap] setFrame:newMapRect];
+    }
     completion:^(BOOL finished){
-        NSLog(@"slide in map");
-    }];
-    [[mTableViewController tableView] setHidden:YES];
-
+        NSLog(@"done sliding map bottom up");
+    }
+     ];
 }
+
+//-(void) slideMapUpTo:(int)pixels{
+//    [UIView animateWithDuration:.4 animations:^{
+//
+//            [[self myMap] setFrame:CGRectMake(0, 0, 320, 415)];
+//        }
+//    completion:^(BOOL finished){
+//        NSLog(@"slide in map");
+//    }];
+//    //[[mTableViewController tableView] setHidden:YES];
+//
+//}
 
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view{
@@ -315,8 +348,10 @@
     }
 
     //[[mTableViewController tableView] setHidden:YES];
-    
-    [self performSelector:@selector(slideMapUp:) withObject:nil afterDelay:0.3];
+    if([[view annotation] isKindOfClass:[AddressAnnotation class]]){
+        [self performSelector:@selector(slideMapTo:) withObject:0 afterDelay:0.1];
+        [view setImage:[UIImage imageNamed:@"opinPinSMALL.png"]];
+    }
 }
 
 - (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation{

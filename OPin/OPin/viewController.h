@@ -46,10 +46,10 @@
 - (NSMutableArray*) getAnnotationIDs:(NSArray*)annotations;
 - (void) removeInvalidAnnotations:(NSArray*)annotations;
 - (void)pushToAreaListView:(id)sender;
--(void) slideMapDown:(int)pixels;
--(void) slideMapUp:(int)pixels;
-
-
+-(void) slideMapTo:(int)pixels;
+-(void) slideMapBottomUp:(int)pixels;
+-(void) handleSwipe:(UISwipeGestureRecognizer*)sender;
+-(void) createGestureRecognizers;
 extern UIImage* myMapImage2;
  
 
@@ -68,4 +68,6 @@ extern UIImage* myMapImage2;
 @property (strong, nonatomic, readwrite) AddressAnnotation* myCurrentAnn;
 @property (nonatomic, readwrite) BOOL isRemovePinBarItemSet;
 @property (nonatomic, strong, readwrite) tableViewController* mTableViewController;
+@property (nonatomic, readwrite) BOOL isTableFullScreen;
+@property (nonatomic, strong) UISwipeGestureRecognizer* tableSwipeGestureRecognizer;
 @end

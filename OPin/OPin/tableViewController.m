@@ -297,8 +297,9 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         }
         else{
-            cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
-            [cell.detailTextLabel setNumberOfLines: 0];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            //cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
+            [cell.detailTextLabel setNumberOfLines: 5];
             Comment* comment = [commentArray objectAtIndex:indexPath.row];
             cell.detailTextLabel.text = [comment mMessage];
             NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
