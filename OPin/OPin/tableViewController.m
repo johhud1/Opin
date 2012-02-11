@@ -285,7 +285,7 @@
     if(indexPath.row == ([[self commentArray] count])){
         cell = [tableView dequeueReusableCellWithIdentifier:@"commentCell"];
         if(cell == nil){
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStateEditingMask reuseIdentifier:@"addCommentCell"];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStateEditingMask reuseIdentifier:@"commentCell"];
         }
     }
     else{
@@ -307,6 +307,7 @@
             NSString* title = [NSString stringWithFormat:@"%@ - %@", user, [dateFormat stringFromDate:[comment mTimestamp]]];
             [cell.textLabel setText:title];
         }
+        
         [[cell detailTextLabel] setTextColor:[UIColor whiteColor]];
         [[cell textLabel] setTextColor:[UIColor whiteColor]];
     }

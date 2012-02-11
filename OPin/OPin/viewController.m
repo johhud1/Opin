@@ -31,6 +31,7 @@
 
 -(void)viewDidLoad{
     
+  
     
     //we must REASIGN THE CURRENT ANNOTATION IN THE VIEW DID LOAD :D
     //[self setMyCurrentAnn: myCurrentAnn];
@@ -51,15 +52,7 @@
     
     self.navigationItem.hidesBackButton = TRUE;
     
-    NSLog(@"about to instantiate tableviewcontroller");
-    mTableViewController = [[tableViewController alloc] initWithStyle:UITableViewStylePlain Frame:CGRectMake(0, 0, 320, 80)];
-    //[[tableViewController navigationController] setHidesBottomBarWhenPushed:NO];
-    [mTableViewController setCommentArray:[[NSMutableArray alloc] initWithObjects:myNewComment, nil]];
-    UITableView* tableView = (UITableView*)[mTableViewController view];
-    [tableView setHidden:YES];
-    NSLog(@"added tableview as a subview");
-    [[self view] addSubview:tableView];
-    
+        
     UIBarButtonItem *areaListButton = [[UIBarButtonItem alloc] initWithTitle:@"List" 
                                                                        style:UIBarButtonItemStyleBordered 
                                                                       target:self 
@@ -70,6 +63,16 @@
     //[areaListBut addTarget:self action: @selector(pushToAreaListView::) forControlEvents:UIControlEventTouchUpInside];
     
     [self jumpToMyLoc];
+    
+    NSLog(@"about to instantiate tableviewcontroller");
+    mTableViewController = [[tableViewController alloc] initWithStyle:UITableViewStylePlain Frame:CGRectMake(0, 0, 320, 80)];
+    //[[tableViewController navigationController] setHidesBottomBarWhenPushed:NO];
+    [mTableViewController setCommentArray:[[NSMutableArray alloc] initWithObjects:myNewComment, nil]];
+    UITableView* tableView = (UITableView*)[mTableViewController view];
+    [tableView setHidden:YES];
+    NSLog(@"added tableview as a subview");
+    [[self view] addSubview:tableView];
+
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -161,7 +164,9 @@
 }
 
 - (void)slideOutTV{
+    [self slideMapUp:80];
     [self jumpToMyLoc];
+    
 
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                           target:self action:@selector(cancelPost)];
@@ -292,11 +297,14 @@
 
 -(void) slideMapUp:(int)pixels{
     [UIView animateWithDuration:.4 animations:^{
+
             [[self myMap] setFrame:CGRectMake(0, 0, 320, 415)];
         }
     completion:^(BOOL finished){
         NSLog(@"slide in map");
     }];
+    [[mTableViewController tableView] setHidden:YES];
+
 }
 
 
@@ -306,7 +314,7 @@
         isRemovePinBarItemSet = FALSE;
     }
 
-    [[mTableViewController tableView] setHidden:YES];
+    //[[mTableViewController tableView] setHidden:YES];
     
     [self performSelector:@selector(slideMapUp:) withObject:nil afterDelay:0.3];
 }

@@ -47,6 +47,7 @@
 - (void) removeInvalidAnnotations:(NSArray*)annotations;
 - (void)pushToAreaListView:(id)sender;
 -(void) slideMapDown:(int)pixels;
+-(void) slideMapUp:(int)pixels;
 
 
 extern UIImage* myMapImage2;

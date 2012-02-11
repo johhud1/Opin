@@ -251,7 +251,7 @@
                     <tabBarItem key="tabBarItem" title="Item" id="hdM-Rx-XcR"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="rA5-ry-Fxg">
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.0044807935455059462" green="0.28057238520408168" blue="0.0021640867449367945" alpha="0.51000000000000001" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.029596149144432701" green="0.2960379464285714" blue="0.13038242934556379" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="N4z-RD-bZ0">
                         <rect key="frame" x="0.0" y="436" width="320" height="44"/>
@@ -269,42 +269,6 @@
     <resources>
         <image name="OPin Symbol.png" width="280" height="120"/>
     </resources>
-    <classes>
-        <class className="addCommentTableViewCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/addCommentTableViewCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="editText" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="signInViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/signInViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="signIn:"/>
-                <relationship kind="outlet" name="username_tf" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="tableViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/tableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addComment_TV" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="topicList" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/topicList.h"/>
-        </class>
-        <class className="viewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/viewController.h"/>
-            <relationships>
-                <relationship kind="action" name="newEvent:"/>
-                <relationship kind="outlet" name="animateView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="myMap" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="myToolbar" candidateClass="UIToolbar"/>
-                <relationship kind="outlet" name="slideInTF" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="upperRightToolBut" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
